@@ -4,6 +4,7 @@ class NoticeBase(BaseModel):
     date : str
     title: str
     link: str
+    thumbnail: str
 
 
 class Notice(NoticeBase):

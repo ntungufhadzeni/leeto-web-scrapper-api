@@ -8,8 +8,10 @@ class Notice(Base):
     date = Column(String(25), nullable=False)
     title = Column(String(225), nullable=False)
     link = Column(String(225), unique=True, nullable=False)
+    thumbnail = Column(String(225), nullable=False)
 
-    def __init__(self, date, title, link):
+    def __init__(self, date, title, link, thumbnail):
         self.date = date
         self.title = title
-        self.link = link
+        self.link = link,
+        self.thumbnail = thumbnail

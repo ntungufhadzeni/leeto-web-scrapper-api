@@ -9,7 +9,7 @@ from config import engine
 
 url = "https://leetolapolokwane.co.za/latest-news/"
 
-# Base.metadata.create_all(bind=engine)
+Base.metadata.create_all(bind=engine)
 Session = sessionmaker()
 session = Session(bind=engine)
 
@@ -19,20 +19,21 @@ def scrap_website():
 
     soup = BeautifulSoup(html_txt, 'lxml')
 
-    posts = soup.find_all('div', class_='recent-posts-details-inner clr')
+    posts = soup.find_all('li', class_='clr')
 
     for post in posts:
         title = post.a['title']
         link = post.a['href']
+        thumbnail = post.img['src']
         date_str = post.find('div', class_='recent-posts-date').text.strip()[:-1]
         date = datetime.datetime.strptime(date_str, '%B %d, %Y').strftime('%d/%m/%Y')
        
-
         try:
-            new_notice = Notice(date, title, link)
+            new_notice = Notice(date, title, link, thumbnail)
             session.add(new_notice)
             session.commit()
         except:
+            print('pass')
             continue
 
 
