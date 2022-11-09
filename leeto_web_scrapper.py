@@ -4,17 +4,13 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 import os
 import datetime
-from models import Notice
-
+from models import Notice, Base
+from config import engine
 
 url = "https://leetolapolokwane.co.za/latest-news/"
 
-
-DATABASE_DIR = os.path.abspath(os.path.dirname(__file__))
-DATABASE_URI = f'sqlite:///{DATABASE_DIR}/notice.db'
-
+# Base.metadata.create_all(bind=engine)
 Session = sessionmaker()
-engine = create_engine(DATABASE_URI)
 session = Session(bind=engine)
 
 
