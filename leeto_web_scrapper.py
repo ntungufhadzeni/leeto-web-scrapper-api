@@ -26,7 +26,7 @@ def scrap_website():
         link = post.a['href']
         thumbnail = post.img['src']
         date_str = post.find('div', class_='recent-posts-date').text.strip()[:-1]
-        date = datetime.datetime.strptime(date_str, '%B %d, %Y').strftime('%d/%m/%Y')
+        date = datetime.datetime.strptime(date_str, '%B %d, %Y').strftime('%B %d, %Y')
        
         try:
             new_notice = Notice(date, title, link, thumbnail)
