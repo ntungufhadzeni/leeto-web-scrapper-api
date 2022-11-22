@@ -15,3 +15,4 @@ class Notice(Base):
         self.title = title
         self.link = link,
         self.thumbnail = thumbnail
+

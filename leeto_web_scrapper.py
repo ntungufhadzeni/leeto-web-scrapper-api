@@ -11,7 +11,7 @@ url = "https://leetolapolokwane.co.za/latest-news/"
 
 Base.metadata.create_all(bind=engine)
 Session = sessionmaker()
-session = Session(bind=engine)
+db = Session(bind=engine)
 
 
 def scrap_website():
@@ -25,15 +25,13 @@ def scrap_website():
         title = post.a['title']
         link = post.a['href']
         thumbnail = post.img['src']
-        date_str = post.find('div', class_='recent-posts-date').text.strip()[:-1]
-        date = datetime.datetime.strptime(date_str, '%B %d, %Y').strftime('%B %d, %Y')
-       
+        date = post.find('div', class_='recent-posts-date').text.strip()[:-1]
+
         try:
             new_notice = Notice(date, title, link, thumbnail)
-            session.add(new_notice)
-            session.commit()
+            db.add(new_notice)
+            db.commit()
         except:
-            print('pass')
             continue
 
 
